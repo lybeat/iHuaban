@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+
+    <style name="HuabanToolBar" parent="android:Widget">
+        <item name="android:textColorPrimary">@color/tabSelectedTextColor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="HuabanTabLayout" parent="Widget.Design.TabLayout">
+        <!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+        <item name="tabIndicatorColor">@color/tabSelectedTextColor</item>
+        <item name="tabIndicatorHeight">@dimen/tab_indicator_height</item>
+        <item name="tabPaddingStart">@dimen/tab_padding_start</item>
+        <item name="tabPaddingEnd">@dimen/tab_padding_end</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabTextAppearance">@style/HuabanTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/tabSelectedTextColor</item>
+    </style>
+    <style name="HuabanTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textColor">@color/tabTextColor</item>
+    </style>
+
+</resources>

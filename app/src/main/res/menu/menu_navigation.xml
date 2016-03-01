@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_home"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/home"/>
+        <item
+            android:id="@+id/menu_draw_board"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/draw_board"/>
+        <item
+            android:id="@+id/menu_follow"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/follow"/>
+        <item
+            android:id="@+id/menu_fans"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/fans"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_theme"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/theme" />
+        <item
+            android:id="@+id/menu_setting"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/setting" />
+    </group>
+
+</menu>

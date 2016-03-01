@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">花瓣</string>
+    <string name="home">首页</string>
+    <string name="find">发现</string>
+    <string name="weekly">周刊</string>
+    <string name="blog">博客</string>
+    <string name="follow">关注</string>
+    <string name="draw_board">画板</string>
+    <string name="fans">粉丝</string>
+    <string name="theme">主题</string>
+    <string name="setting">设置</string>
+</resources>

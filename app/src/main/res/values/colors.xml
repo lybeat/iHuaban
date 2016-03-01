@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F05C8D</color>
+    <color name="windowBackground">#EDEAEC</color>
+    <color name="tabTextColor">#BFBFBF</color>
+    <color name="tabSelectedTextColor">#FAFAFA</color>
+    <color name="cardBackgroundColor">#FAFAFA</color>
+</resources>
