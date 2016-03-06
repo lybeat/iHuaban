@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/find_recycler"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="@string/find"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

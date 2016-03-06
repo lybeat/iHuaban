@@ -1,73 +1,54 @@
 package com.lybeat.huaban.ui;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.lybeat.huaban.R;
-import com.lybeat.huaban.adapter.TabAdapter;
 import com.lybeat.huaban.util.PictureUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    public static final String NAVIGATION_FRAGMENT = "navigation_fragment";
-
-    private List<Fragment> fragments;
-    private List<String> titles;
-    private TabAdapter tabAdapter;
+public class MainActivity extends BaseActivity
+        implements NavigationView.OnNavigationItemSelectedListener,
+        BaseFragment.LoadTabLayout {
 
     private TabLayout tabLayout;
-    private ViewPager viewPager;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
+    private BaseFragment currentFragment;
+    private HomeFragment homeFragment;
+    private BoardFragment boardFragment;
+    private FollowFragment followFragment;
+    private FansFragment fansFragment;
+    private ThemeFragment themeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initData();
         initView();
+        initFragment();
     }
 
-    private void initData() {
-        HomeFragment homeFragment = new HomeFragment();
-        FindFragment findFragment = new FindFragment();
-        WeeklyFragment weeklyFragment = new WeeklyFragment();
-        BlogFragment blogFragment = new BlogFragment();
-        fragments = new ArrayList<>();
-        fragments.add(homeFragment);
-        fragments.add(findFragment);
-        fragments.add(weeklyFragment);
-        fragments.add(blogFragment);
-
-        Resources res = getResources();
-        titles = new ArrayList<>();
-        titles.add(res.getString(R.string.home));
-        titles.add(res.getString(R.string.find));
-        titles.add(res.getString(R.string.weekly));
-        titles.add(res.getString(R.string.blog));
-
-        tabAdapter = new TabAdapter(getSupportFragmentManager(), fragments, titles);
+    private void initFragment() {
+        homeFragment = new HomeFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_container, homeFragment).commit();
+        currentFragment = homeFragment;
     }
 
     private void initView() {
@@ -82,7 +63,6 @@ public class MainActivity extends AppCompatActivity
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("MainActivity", "NavigationOnClickListener");
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
@@ -93,20 +73,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
-
-        viewPager.setAdapter(tabAdapter);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        navigationView.setCheckedItem(R.id.menu_home);
+//        navigationView.setCheckedItem(R.id.menu_home);
     }
 
     @Override
@@ -117,26 +93,65 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Intent intent = new Intent();
-        intent.setClass(this, NavigationActivity.class);
         switch (item.getItemId()) {
             case R.id.menu_home :
-                intent.putExtra(NAVIGATION_FRAGMENT, 0);
+                if (homeFragment == null) {
+                    homeFragment = new HomeFragment();
+                }
+                switchFragment(homeFragment);
                 break;
-            case R.id.menu_draw_board :
-                intent.putExtra(NAVIGATION_FRAGMENT, 1);
+            case R.id.menu_board:
+                if (boardFragment == null) {
+                    boardFragment = new BoardFragment();
+                }
+                switchFragment(boardFragment);
                 break;
             case R.id.menu_follow :
+                if (followFragment == null) {
+                    followFragment = new FollowFragment();
+                }
+                switchFragment(followFragment);
                 break;
             case R.id.menu_fans :
+                if (fansFragment == null) {
+                    fansFragment = new FansFragment();
+                }
+                switchFragment(fansFragment);
                 break;
-            case R.id.menu_theme:
+            case R.id.menu_theme :
+                if (themeFragment == null) {
+                    themeFragment = new ThemeFragment();
+                }
+                switchFragment(themeFragment);
                 break;
-            case R.id.menu_setting:
+            case R.id.menu_setting :
                 break;
         }
-        startActivity(intent);
+        tabLayout.setVisibility(currentFragment.isHasTabLayout() ? View.VISIBLE : View.GONE);
         drawerLayout.closeDrawers();
         return true;
+    }
+
+    private void switchFragment(BaseFragment toFragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (currentFragment != toFragment) {
+            if (toFragment.isAdded()) {
+                ft.hide(currentFragment).show(toFragment).commit();
+            } else {
+                ft.hide(currentFragment).add(R.id.fragment_container, toFragment).commit();
+            }
+            currentFragment = toFragment;
+        }
+    }
+
+    @Override
+    public void loadTabLayout(View view) {
+        if (view instanceof ViewPager) {
+            tabLayout.setVisibility(View.VISIBLE);
+            tabLayout.setupWithViewPager((ViewPager) view);
+        } else {
+            tabLayout.setVisibility(View.GONE);
+        }
     }
 }

@@ -3,6 +3,7 @@
     package="com.lybeat.huaban" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     
     <application
         android:allowBackup="true"
@@ -17,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.NavigationActivity"/>
+        <activity android:name=".ui.CategoryDetailActivity"/>
     </application>
 
 </manifest>
