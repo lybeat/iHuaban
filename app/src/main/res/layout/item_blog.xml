@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="18dp"
+    android:gravity="center_vertical">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/blog_thumb_img"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/blog_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:singleLine="true"
+            style="@style/ArticleTitleTextAppearance"
+            android:text="blog title" />
+
+        <TextView
+            android:id="@+id/blog_summary_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="2"
+            style="@style/ArticleSummaryTextAppearance"
+            android:text="blog summary" />
+
+        <TextView
+            android:id="@+id/blog_tags_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:singleLine="true"
+            style="@style/ArticleSummaryTextAppearance"
+            android:text="blog tag" />
+
+        <TextView
+            android:id="@+id/blog_date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:singleLine="true"
+            style="@style/ArticleSummaryTextAppearance"
+            android:text="blog date" />
+
+    </LinearLayout>
+
+</LinearLayout>
