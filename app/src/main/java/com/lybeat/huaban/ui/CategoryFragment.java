@@ -1,5 +1,6 @@
 package com.lybeat.huaban.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -40,7 +41,7 @@ public class CategoryFragment extends BaseFragment
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         CategoryLoader categoryLoader = new CategoryLoader(getActivity());
-         categories = categoryLoader.loadCategory();
+        categories = categoryLoader.loadCategory();
 
         CategoryAdapter adapter = new CategoryAdapter(getActivity(), categories);
         adapter.setOnItemClickListener(this);
@@ -52,6 +53,10 @@ public class CategoryFragment extends BaseFragment
     @Override
     public void onItemClick(View view, int position) {
         String url = categories.get(position).getUrl();
+        Intent intent = new Intent();
+        intent.putExtra("url", categories.get(position).getUrl());
+        intent.setClass(getActivity(), CategoryDetailActivity.class);
+        startActivity(intent);
         Toast.makeText(getActivity(), "url: " + url, Toast.LENGTH_LONG).show();
     }
 

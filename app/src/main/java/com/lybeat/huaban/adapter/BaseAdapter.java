@@ -110,6 +110,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.BaseH
 
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
         if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams
+                && headerView != null
                 && holder.getLayoutPosition() == 0) {
             ((StaggeredGridLayoutManager.LayoutParams) lp).setFullSpan(true);
         }

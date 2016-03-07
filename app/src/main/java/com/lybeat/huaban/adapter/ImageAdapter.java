@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.lybeat.huaban.R;
 import com.lybeat.huaban.model.Image;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,7 +35,9 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public void onBindHolder(BaseHolder holder, int position) {
         if (holder instanceof ImageHolder) {
-            ((ImageHolder) holder).imageImg.setImageResource(R.drawable.avatar);
+            Picasso.with(context).load(images.get(position).getCoverUrl())
+                    .placeholder(R.drawable.avatar).error(R.drawable.avatar)
+                    .into(((ImageHolder) holder).imageImg);
         }
     }
 

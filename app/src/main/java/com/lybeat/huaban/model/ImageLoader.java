@@ -17,12 +17,16 @@ import java.util.List;
  */
 public class ImageLoader extends AsyncTask<String, Void, List<Image>>{
 
-    public interface onCompleteListener {
+    public interface OnCompleteListener {
         void onSuccess(List<Image> images);
         void onFailed();
     }
 
-    private onCompleteListener listener;
+    private OnCompleteListener listener;
+
+    public ImageLoader(OnCompleteListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected List<Image> doInBackground(String... params) {
@@ -45,11 +49,17 @@ public class ImageLoader extends AsyncTask<String, Void, List<Image>>{
         try {
             Document document = Jsoup.connect(url).timeout(5000).get();
             List<Image> images = new ArrayList<>();
-            Element imgElement = document.select("a.img").get(0);
-            String imageUrl = imgElement.attr("href");
-            String coverUrl = imgElement.select("img").attr("src");
-            Log.i("MainActivity", "imageUrl: " + imageUrl);
-            Log.i("MainActivity", "coverUrl: " + coverUrl);
+            int size = document.select("div.wfc").size();
+            Log.i("MainActivity", "size: " + size);
+            for (int i=0; i<size; i++) {
+                Element imgElement = document.select("div.wfc").get(i);
+                String imageUrl = imgElement.select("a").attr("href");
+                String coverUrl = imgElement.select("a img").attr("src");
+                Image image = new Image(imageUrl, coverUrl);
+                images.add(image);
+                Log.i("MainActivity", "imageUrl: " + imageUrl);
+                Log.i("MainActivity", "coverUrl: " + coverUrl);
+            }
 
             return images;
         } catch (IOException e) {
