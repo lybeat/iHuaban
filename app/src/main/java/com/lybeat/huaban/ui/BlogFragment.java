@@ -1,5 +1,6 @@
 package com.lybeat.huaban.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lybeat.huaban.R;
@@ -25,12 +27,15 @@ import java.util.List;
  * Date: 2016/2/28
  */
 public class BlogFragment extends BaseFragment implements
-        BlogLoader.onCompleteListener, RefreshLayout.OnRefreshListener,
+        BlogLoader.OnCompleteListener, RefreshLayout.OnRefreshListener,
         RefreshLayout.OnLoadMoreListener, BlogAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private RefreshLayout swipeRefresh;
+    private View footer;
+    private TextView footerInfoTxt;
 
+    private BlogAdapter adapter;
     private List<Blog> blogs = new ArrayList<>();
     private String nextPageUrl;
 
@@ -54,9 +59,22 @@ public class BlogFragment extends BaseFragment implements
                 swipeRefresh.setRefreshing(true);
             }
         });
-        onRefresh();
+        initData();
 
         return view;
+    }
+
+    private void initData() {
+        BlogLoader blogLoader = new BlogLoader(this);
+        blogLoader.execute("http://blog.huaban.com/");
+        adapter = new BlogAdapter(getActivity(), this.blogs);
+        adapter.setOnItemClickListener(this);
+        footer = LayoutInflater.from(getActivity()).inflate(R.layout.refresh_footer, null);
+        footerInfoTxt = (TextView) footer.findViewById(R.id.refresh_txt);
+        footerInfoTxt.setText("正在加载更多数据");
+        footer.setVisibility(View.GONE);
+        adapter.addFooterView(footer);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -75,10 +93,6 @@ public class BlogFragment extends BaseFragment implements
         }
         this.nextPageUrl = nextPageUrl;
         this.blogs.addAll(blogs);
-        Log.i("MainActivity", "blogs size: " + this.blogs.size());
-        BlogAdapter adapter = new BlogAdapter(getActivity(), this.blogs);
-        adapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
@@ -102,12 +116,23 @@ public class BlogFragment extends BaseFragment implements
 
     @Override
     public void onLoadMore() {
+        footer.setVisibility(View.VISIBLE);
         BlogLoader blogLoader = new BlogLoader(this);
         blogLoader.execute(nextPageUrl);
     }
 
     @Override
-    public void onItemClick(View view, int postion) {
-        Log.i("MainActivity", "onItemClick postion: " + postion);
+    public void onItemClick(View view, int position) {
+        Log.i("MainActivity", "onItemClick position: " + position);
+        Log.i("MainActivity", "blog url: " + blogs.get(position).getUrl());
+        Intent intent = new Intent();
+        intent.putExtra("blog_url", blogs.get(position).getUrl());
+        intent.setClass(getActivity(), BlogDetailActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+        Log.i("MainActivity", "onItemLongClick position: " + position);
     }
 }

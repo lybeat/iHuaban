@@ -21,31 +21,31 @@ public class CategoryLoader {
     public ArrayList<Category> loadCategory() {
         ArrayList<Category> categories = new ArrayList<>();
         int resIds[] = new int[] {
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
-                R.drawable.avatar,
+                R.drawable.ic_category_food,
+                R.drawable.ic_category_travel,
+                R.drawable.ic_category_handcraft,
+                R.drawable.ic_category_pet,
+                R.drawable.ic_category_gift,
+                R.drawable.ic_category_geek,
+                R.drawable.ic_category_anime,
+                R.drawable.ic_category_game,
+                R.drawable.ic_category_building,
+                R.drawable.ic_category_movie,
+                R.drawable.ic_category_funny,
         };
         String[] names = context.getResources().getStringArray(R.array.category_item);
         String[] urls = new String[] {
-                "http://blog.huaban.com/favorite/food_drink/",
-                "http://blog.huaban.com/favorite/travel_places/",
-                "http://blog.huaban.com/favorite/diy_crafts/",
-                "http://blog.huaban.com/favorite/pets/",
-                "http://blog.huaban.com/favorite/desire/",
-                "http://blog.huaban.com/favorite/geek/",
-                "http://blog.huaban.com/favorite/anime/",
-                "http://blog.huaban.com/favorite/games/",
-                "http://blog.huaban.com/favorite/architecture/",
-                "http://blog.huaban.com/favorite/film_music_books/",
-                "http://blog.huaban.com/favorite/funny/",
+                "http://huaban.com/favorite/food_drink/",
+                "http://huaban.com/favorite/travel_places/",
+                "http://huaban.com/favorite/diy_crafts/",
+                "http://huaban.com/favorite/pets/",
+                "http://huaban.com/favorite/desire/",
+                "http://huaban.com/favorite/geek/",
+                "http://huaban.com/favorite/anime/",
+                "http://huaban.com/favorite/games/",
+                "http://huaban.com/favorite/architecture/",
+                "http://huaban.com/favorite/film_music_books/",
+                "http://huaban.com/favorite/funny/",
         };
         for (int i=0; i<resIds.length; i++) {
             Category category = new Category(resIds[i], names[i], urls[i]);

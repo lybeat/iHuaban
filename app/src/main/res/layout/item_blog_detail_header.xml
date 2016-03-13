@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/ArticleTitleTextAppearance.Middle"
+        android:id="@+id/blog_detail_title_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:text="blog title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:id="@+id/blog_detail_date_txt"
+            style="@style/ArticleSummaryTextAppearance.Middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="blog date" />
+
+        <TextView
+            android:id="@+id/blog_detail_tag_txt"
+            style="@style/ArticleSummaryTextAppearance.Middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:singleLine="true"
+            android:text="blog tag" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/blog_detail_content_txt"
+        style="@style/ArticleSummaryTextAppearance.Middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:lineSpacingExtra="2dp"
+        android:text="blog content" />
+
+</LinearLayout>

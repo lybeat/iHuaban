@@ -16,15 +16,15 @@ import java.util.List;
  */
 public class BlogLoader extends AsyncTask<String, Integer, List<Blog>>  {
 
-    public interface onCompleteListener {
+    public interface OnCompleteListener {
         void onSuccess(List<Blog> blogs, String nextPageUrl);
         void onFailed();
     }
 
-    private onCompleteListener listener;
+    private OnCompleteListener listener;
     private String nextPageUrl;
 
-    public BlogLoader(onCompleteListener listener) {
+    public BlogLoader(OnCompleteListener listener) {
         this.listener = listener;
     }
 

@@ -35,9 +35,14 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public void onBindHolder(BaseHolder holder, int position) {
         if (holder instanceof ImageHolder) {
-            Picasso.with(context).load(images.get(position).getCoverUrl())
-                    .placeholder(R.drawable.avatar).error(R.drawable.avatar)
-                    .into(((ImageHolder) holder).imageImg);
+            try {
+                Picasso.with(context).load(images.get(position).getCoverUrl())
+                        .placeholder(R.mipmap.huaban_icon_64px)
+                        .error(R.mipmap.huaban_icon_64px)
+                        .into(((ImageHolder) holder).imageImg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

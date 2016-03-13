@@ -24,7 +24,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.BaseH
         void onItemLongClick(View view,int position);
     }
 
-    public OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;

@@ -28,12 +28,28 @@
         <item name="android:textSize">@dimen/tab_text_size</item>
         <item name="android:textColor">@color/lightGary</item>
     </style>
-    <style name="ArticleTitleTextAppearance" parent="Base.TextAppearance.AppCompat">
+    <style name="ArticleTitleTextAppearance.Small" parent="Base.TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
-    <style name="ArticleSummaryTextAppearance" parent="Base.TextAppearance.AppCompat">
+    <style name="ArticleTitleTextAppearance.Middle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="ArticleTitleTextAppearance.Large" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="ArticleSummaryTextAppearance.Small" parent="Base.TextAppearance.AppCompat">
         <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/darkGary</item>
+    </style>
+    <style name="ArticleSummaryTextAppearance.Middle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/darkGary</item>
+    </style>
+    <style name="ArticleSummaryTextAppearance.Large" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/darkGary</item>
     </style>
 

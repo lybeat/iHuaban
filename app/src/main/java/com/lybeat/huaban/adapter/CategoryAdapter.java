@@ -48,8 +48,8 @@ public class CategoryAdapter extends BaseAdapter {
 
     public class CategoryHolder extends BaseHolder {
 
-        private ImageView categoryImg;
-        private TextView categoryTxt;
+        ImageView categoryImg;
+        TextView categoryTxt;
 
         public CategoryHolder(View itemView) {
             super(itemView);

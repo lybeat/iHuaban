@@ -72,7 +72,7 @@ public class HomeFragment extends BaseFragment {
 
         Resources res = getResources();
         titles = new ArrayList<>();
-        titles.add(res.getString(R.string.home));
+        titles.add(res.getString(R.string.newest));
         titles.add(res.getString(R.string.find));
         titles.add(res.getString(R.string.category));
         titles.add(res.getString(R.string.weekly));

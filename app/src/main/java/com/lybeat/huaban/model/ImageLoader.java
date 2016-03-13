@@ -1,7 +1,6 @@
 package com.lybeat.huaban.model;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,17 +47,17 @@ public class ImageLoader extends AsyncTask<String, Void, List<Image>>{
     private List<Image> parseImage(String url) {
         try {
             Document document = Jsoup.connect(url).timeout(5000).get();
+//            Log.i("MainActivity", "doc: " + document.toString());
             List<Image> images = new ArrayList<>();
             int size = document.select("div.wfc").size();
-            Log.i("MainActivity", "size: " + size);
             for (int i=0; i<size; i++) {
-                Element imgElement = document.select("div.wfc").get(i);
-                String imageUrl = imgElement.select("a").attr("href");
-                String coverUrl = imgElement.select("a img").attr("src");
+                Element imgElement = document.select("div.wfc a").get(i);
+                String imageUrl = imgElement.attr("href");
+                String coverUrl = imgElement.select("img").attr("src");
                 Image image = new Image(imageUrl, coverUrl);
                 images.add(image);
-                Log.i("MainActivity", "imageUrl: " + imageUrl);
-                Log.i("MainActivity", "coverUrl: " + coverUrl);
+//                Log.i("MainActivity", "imageUrl: " + imageUrl);
+//                Log.i("MainActivity", "coverUrl: " + coverUrl);
             }
 
             return images;
