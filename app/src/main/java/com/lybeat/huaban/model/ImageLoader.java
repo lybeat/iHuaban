@@ -1,6 +1,7 @@
 package com.lybeat.huaban.model;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,17 +50,25 @@ public class ImageLoader extends AsyncTask<String, Void, List<Image>>{
             Document document = Jsoup.connect(url).timeout(5000).get();
 //            Log.i("MainActivity", "doc: " + document.toString());
             List<Image> images = new ArrayList<>();
-            int size = document.select("div.wfc").size();
+            int size = document.select("div.wfc a").size();
+            Log.i("MainActivity", "size: " + size);
             for (int i=0; i<size; i++) {
                 Element imgElement = document.select("div.wfc a").get(i);
                 String imageUrl = imgElement.attr("href");
-                String coverUrl = imgElement.select("img").attr("src");
-                Image image = new Image(imageUrl, coverUrl);
-                images.add(image);
+                String imageWidth = imgElement.select("img").attr("width");
+                String imageHeight = imgElement.select("img").attr("height");
+                if (imageWidth != null && !imageWidth.equals("")
+                        && imageHeight != null && !imageHeight.equals("")) {
+                    Image image = new Image("http://huaban.com" + imageUrl,
+                            Integer.valueOf(imageWidth),
+                            Integer.valueOf(imageHeight));
+                    images.add(image);
+                }
 //                Log.i("MainActivity", "imageUrl: " + imageUrl);
-//                Log.i("MainActivity", "coverUrl: " + coverUrl);
+//                Log.i("MainActivity", "imageWidth: " + imageWidth);
+//                Log.i("MainActivity", "imageHeight: " + imageHeight);
             }
-
+//
             return images;
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,11 +7,15 @@ package com.lybeat.huaban.model;
 public class Image {
 
     private String url;
-    private String coverUrl;
+    private int width;
+    private int height;
 
-    public Image(String url, String coverUrl) {
+    public Image(){}
+
+    public Image(String url, int width, int height) {
         this.url = url;
-        this.coverUrl = coverUrl;
+        this.width = width;
+        this.height = height;
     }
 
     public String getUrl() {
@@ -22,11 +26,19 @@ public class Image {
         this.url = url;
     }
 
-    public String getCoverUrl() {
-        return coverUrl;
+    public int getWidth() {
+        return width;
     }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

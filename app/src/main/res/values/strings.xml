@@ -6,11 +6,11 @@
     <string name="category">分类</string>
     <string name="weekly">周刊</string>
     <string name="blog">博客</string>
-    <string name="follow">关注</string>
-    <string name="draw_board">画板</string>
-    <string name="fans">粉丝</string>
-    <string name="theme">主题</string>
-    <string name="setting">设置</string>
+    <string name="board">我的画板</string>
+    <string name="follow">我的关注</string>
+    <string name="fans">我的粉丝</string>
+    <string name="theme">主题选择</string>
+    <string name="setting">设置&amp;反馈</string>
 
     <string-array name="category_item">
         <item name="category_food">美食</item>

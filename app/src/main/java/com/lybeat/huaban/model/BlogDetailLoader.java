@@ -6,15 +6,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: lybeat
  * Date: 2016/3/9
  */
-public class BlogDetailLoader extends AsyncTask<String, Void, Blog> {
+public class BlogDetailLoader extends AsyncTask<String, Void, BlogDetail> {
 
     public interface OnCompleteListener {
-        void onSuccess(Blog blog);
+        void onSuccess(BlogDetail blog);
         void onFailed();
     }
 
@@ -25,23 +27,23 @@ public class BlogDetailLoader extends AsyncTask<String, Void, Blog> {
     }
 
     @Override
-    protected Blog doInBackground(String... params) {
+    protected BlogDetail doInBackground(String... params) {
         String url = params[0];
         return parseBlog(url);
     }
 
     @Override
-    protected void onPostExecute(Blog blog) {
-        super.onPostExecute(blog);
+    protected void onPostExecute(BlogDetail blogDetail) {
+        super.onPostExecute(blogDetail);
 
-        if (blog != null) {
-            listener.onSuccess(blog);
+        if (blogDetail != null) {
+            listener.onSuccess(blogDetail);
         } else {
             listener.onFailed();
         }
     }
 
-    private Blog parseBlog(String url) {
+    private BlogDetail parseBlog(String url) {
         try {
             Document document = Jsoup.connect(url).timeout(5000).get();
 
@@ -52,18 +54,19 @@ public class BlogDetailLoader extends AsyncTask<String, Void, Blog> {
                 tag += document.select("span.tags a").get(i).text() + " ";
             }
             String content = document.select("div.entry-content p").text();
-            String imgUrl = "";
+            List<Image> images = new ArrayList<>();
             for (int i=0; i<document.select("div.entry-content img").size(); i++) {
-                imgUrl += document.select("div.entry-content img").get(i).attr("src") + " ";
+                String imgUrl = document.select("div.entry-content img").get(i).attr("src");
+                String width = document.select("div.entry-content img").get(i).attr("width");
+                String height = document.select("div.entry-content img").get(i).attr("height");
+                Image image = null;
+                if (width != null && !width.equals("")
+                        && height != null && !height.equals("")) {
+                    image = new Image(imgUrl, Integer.valueOf(width), Integer.valueOf(height));
+                }
+                images.add(image);
             }
-
-//            Log.i("MainActivity", "title: " + title);
-//            Log.i("MainActivity", "time: " + time);
-//            Log.i("MainActivity", "tag: " + tag);
-//            Log.i("MainActivity", "content: " + content);
-//            Log.i("MainActivity", "imgUrl: " + imgUrl);
-
-            return new Blog("*", title, content, time, tag, imgUrl);
+            return new BlogDetail(title, content, time, tag, images);
         } catch (IOException e) {
             e.printStackTrace();
         }

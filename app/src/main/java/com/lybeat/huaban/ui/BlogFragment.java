@@ -65,8 +65,6 @@ public class BlogFragment extends BaseFragment implements
     }
 
     private void initData() {
-        BlogLoader blogLoader = new BlogLoader(this);
-        blogLoader.execute("http://blog.huaban.com/");
         adapter = new BlogAdapter(getActivity(), this.blogs);
         adapter.setOnItemClickListener(this);
         footer = LayoutInflater.from(getActivity()).inflate(R.layout.refresh_footer, null);
@@ -75,6 +73,8 @@ public class BlogFragment extends BaseFragment implements
         footer.setVisibility(View.GONE);
         adapter.addFooterView(footer);
         recyclerView.setAdapter(adapter);
+        BlogLoader blogLoader = new BlogLoader(this);
+        blogLoader.execute("http://blog.huaban.com/");
     }
 
     @Override

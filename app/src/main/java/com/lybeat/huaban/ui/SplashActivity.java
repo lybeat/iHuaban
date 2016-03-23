@@ -25,8 +25,7 @@ public class SplashActivity extends Activity {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         View decor = window.getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decor.setSystemUiVisibility(uiOptions);
 
         setContentView(R.layout.activity_splash);

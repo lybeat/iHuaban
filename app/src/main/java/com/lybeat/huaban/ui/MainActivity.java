@@ -19,8 +19,8 @@ import android.view.View;
 import com.lybeat.huaban.R;
 import com.lybeat.huaban.util.PictureUtil;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
+public class MainActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
         BaseFragment.LoadTabLayout {
 
     private TabLayout tabLayout;
@@ -47,12 +47,12 @@ public class MainActivity extends BaseActivity
         homeFragment = new HomeFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container, homeFragment).commit();
+        ft.add(R.id.main_fragment_container, homeFragment).commit();
         currentFragment = homeFragment;
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_tool_bar);
         Bitmap bmp = PictureUtil.getScaledBitmapFromResource(this, R.drawable.avatar, 36, 36);
         bmp = PictureUtil.getRoundBitmap(bmp);
         Drawable drawable = new BitmapDrawable(getResources(), bmp);
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity
         navigationView.setCheckedItem(R.id.menu_home);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
 
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab());
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity
             if (toFragment.isAdded()) {
                 ft.hide(currentFragment).show(toFragment).commit();
             } else {
-                ft.hide(currentFragment).add(R.id.fragment_container, toFragment).commit();
+                ft.hide(currentFragment).add(R.id.main_fragment_container, toFragment).commit();
             }
             currentFragment = toFragment;
         }

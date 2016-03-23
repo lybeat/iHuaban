@@ -54,7 +54,7 @@ public class CategoryFragment extends BaseFragment
     public void onItemClick(View view, int position) {
         String url = categories.get(position).getUrl();
         Intent intent = new Intent();
-        intent.putExtra("url", url);
+        intent.putExtra("url", "http://huaban.com/favorite/anime/?im4wjwnn&max=657929401&limit=20&wfl=1");
         intent.setClass(getActivity(), CategoryDetailActivity.class);
         startActivity(intent);
         Toast.makeText(getActivity(), "url: " + url, Toast.LENGTH_LONG).show();

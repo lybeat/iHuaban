@@ -4,10 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.lybeat.huaban.R;
 import com.lybeat.huaban.model.Image;
+import com.lybeat.huaban.widget.FlowImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,7 +36,10 @@ public class ImageAdapter extends BaseAdapter {
     public void onBindHolder(BaseHolder holder, int position) {
         if (holder instanceof ImageHolder) {
             try {
-                Picasso.with(context).load(images.get(position).getCoverUrl())
+                Image image = images.get(position);
+                ((ImageHolder) holder).imageImg.setOriginalSize(image.getWidth(), image.getHeight());
+                Picasso.with(context).load(images.get(position).getUrl())
+                        .resize(500, 500 * image.getHeight() / image.getWidth())
                         .placeholder(R.mipmap.huaban_icon_64px)
                         .error(R.mipmap.huaban_icon_64px)
                         .into(((ImageHolder) holder).imageImg);
@@ -53,11 +56,11 @@ public class ImageAdapter extends BaseAdapter {
 
     public class ImageHolder extends BaseHolder {
 
-        private ImageView imageImg;
+        private FlowImageView imageImg;
 
         public ImageHolder(View itemView) {
             super(itemView);
-            imageImg = (ImageView) itemView.findViewById(R.id.image_img);
+            imageImg = (FlowImageView) itemView.findViewById(R.id.image_img);
         }
     }
 }

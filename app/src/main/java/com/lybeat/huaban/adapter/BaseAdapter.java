@@ -133,7 +133,6 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.BaseH
     public abstract void onBindHolder(BaseHolder holder, int position);
     public abstract int getCount();
 
-
     public static class BaseHolder extends RecyclerView.ViewHolder {
 
         public BaseHolder(View itemView) {
